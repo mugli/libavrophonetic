@@ -162,7 +162,6 @@ func (trie *Trie) MatchLongestCommonPrefix(prefix string) (matchedPrefix string,
 func (trie *Trie) LoadFromGob(r io.Reader) error {
 	decoder := gob.NewDecoder(r)
 	err := decoder.Decode(trie)
-
 	if err != nil {
 		return err
 	}

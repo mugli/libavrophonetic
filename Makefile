@@ -7,8 +7,9 @@ install-tools: download
 	@cat tools/tools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
 
 format-all:
-	@go fmt ./...
+	@echo Formatting files
+	@gofumpt -w .
 
-lint: install-tools format-all
+lint: format-all
 	@echo golangci-lint run
 	@golangci-lint run ./...
