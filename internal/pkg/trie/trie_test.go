@@ -1,1 +1,1 @@
-package trie
+package trie_test

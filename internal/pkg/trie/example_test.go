@@ -26,7 +26,7 @@ func Example() {
 	// বাঙালি
 }
 
-func Example_matchLongestCommonPrefix()  {
+func Example_matchLongestCommonPrefix() {
 	// Create a new list and put some numbers in it.
 	t := trie.NewTrie()
 	t.AddWord("বাংলা")

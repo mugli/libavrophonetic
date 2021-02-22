@@ -8,16 +8,17 @@ import (
 
 // Node is an element of the Trie.
 type Node struct {
-	Children     map[rune]*Node
+	Children map[rune]*Node
 	// CompleteWord is empty string for most Node.
 	// It only contains a value when the current Node contains the last character/rune of a complete entry in the Trie.
 	CompleteWord string
 }
 
-// NewNode returns an initialized Node
+// NewNode returns an initialized Node.
 func NewNode() *Node {
 	return &Node{
-		Children: map[rune]*Node{},
+		Children:     map[rune]*Node{},
+		CompleteWord: "",
 	}
 }
 
@@ -157,7 +158,7 @@ func (trie *Trie) MatchLongestCommonPrefix(prefix string) (matchedPrefix string,
 	return
 }
 
-// LoadFromGob deserializes a Trie encoded as gob ("encoding/gob")
+// LoadFromGob deserializes a Trie encoded as gob ("encoding/gob").
 func (trie *Trie) LoadFromGob(r io.Reader) error {
 	decoder := gob.NewDecoder(r)
 	err := decoder.Decode(trie)
@@ -169,7 +170,7 @@ func (trie *Trie) LoadFromGob(r io.Reader) error {
 	return nil
 }
 
-// SaveToGob serializes a Trie as gob ("encoding/gob")
+// SaveToGob serializes a Trie as gob ("encoding/gob").
 func (trie *Trie) SaveToGob(w io.Writer) error {
 	encoder := gob.NewEncoder(w)
 	err := encoder.Encode(trie)
