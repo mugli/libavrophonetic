@@ -13,3 +13,4 @@ linters:
     - gci
   disable:
     - asciicheck
+    - gofumpt

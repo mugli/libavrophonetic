@@ -8,7 +8,7 @@ install-tools: download
 
 format-all:
 	@echo Formatting files
-	@gofumpt -w .
+	@go fmt ./...
 
 lint: format-all
 	@echo golangci-lint run
