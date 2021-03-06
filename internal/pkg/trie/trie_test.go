@@ -17,6 +17,8 @@ func buildTrie(entries []string) *trie.Trie {
 }
 
 func TestNode_FindMatchingNode(t *testing.T) {
+	t.Parallel()
+
 	tree := buildTrie([]string{
 		"ক", "কখ", "কখগঘঙচছ",
 	})
@@ -35,6 +37,8 @@ func TestNode_FindMatchingNode(t *testing.T) {
 }
 
 func TestNode_IsCompleteWord(t *testing.T) {
+	t.Parallel()
+
 	tree := buildTrie([]string{
 		"ক", "কখ", "কখগঘঙচছ",
 	})
@@ -53,6 +57,8 @@ func TestNode_IsCompleteWord(t *testing.T) {
 }
 
 func TestTrie_MatchPrefix(t *testing.T) {
+	t.Parallel()
+
 	tree := buildTrie([]string{
 		"ক", "কখগ", "কখগঘঙ",
 		"চ", "চছজ", "চছজঝঞ",
@@ -86,12 +92,16 @@ func TestTrie_MatchPrefix(t *testing.T) {
 	}
 
 	for _, testCase := range tests {
-		got := tree.MatchPrefix(testCase.prefix)
-		assert.ElementsMatch(t, testCase.want, got)
+		t.Run(testCase.prefix, func(t *testing.T) {
+			got := tree.MatchPrefix(testCase.prefix)
+			assert.ElementsMatch(t, testCase.want, got)
+		})
 	}
 }
 
 func TestTrie_MatchLongestCommonPrefix(t *testing.T) {
+	t.Parallel()
+
 	tree := buildTrie([]string{
 		"ক", "কখগ", "কখগঘঙ",
 		"চ", "চছজ", "চছজঝঞ",
@@ -136,15 +146,19 @@ func TestTrie_MatchLongestCommonPrefix(t *testing.T) {
 	}
 
 	for _, testCase := range tests {
-		matchedPrefixGot, remainingGot, gotCompleteWord, node := tree.MatchLongestCommonPrefix(testCase.prefix)
-		assert.Equal(t, testCase.matchedPrefixWant, matchedPrefixGot)
-		assert.Equal(t, testCase.remainingWant, remainingGot)
-		assert.Equal(t, testCase.shouldBeCompleteWord, gotCompleteWord)
-		assert.Equal(t, testCase.nodeIsNil, node == nil)
+		t.Run(testCase.prefix, func(t *testing.T) {
+			matchedPrefixGot, remainingGot, gotCompleteWord, node := tree.MatchLongestCommonPrefix(testCase.prefix)
+			assert.Equal(t, testCase.matchedPrefixWant, matchedPrefixGot)
+			assert.Equal(t, testCase.remainingWant, remainingGot)
+			assert.Equal(t, testCase.shouldBeCompleteWord, gotCompleteWord)
+			assert.Equal(t, testCase.nodeIsNil, node == nil)
+		})
 	}
 }
 
 func TestTrie_Serialization(t *testing.T) {
+	t.Parallel()
+
 	tree := buildTrie([]string{
 		"ক", "কখগ", "কখগঘঙ",
 		"চ", "চছজ", "চছজঝঞ",
@@ -157,11 +171,11 @@ func TestTrie_Serialization(t *testing.T) {
 	deserializedTree := trie.NewTrie()
 	deserializedTree.LoadFromGob(buf)
 
-	partialNode := tree.Root.FindMatchingNode("কখগঘ")
+	partialNode := deserializedTree.Root.FindMatchingNode("কখগঘ")
 	assert.NotNil(t, partialNode)
 	assert.False(t, partialNode.IsCompleteWord())
 
-	matchedPrefixGot, remainingGot, gotCompleteWord, node := tree.MatchLongestCommonPrefix("কখগঘঙচছজঝঞ")
+	matchedPrefixGot, remainingGot, gotCompleteWord, node := deserializedTree.MatchLongestCommonPrefix("কখগঘঙচছজঝঞ")
 	assert.Equal(t, "কখগঘঙ", matchedPrefixGot)
 	assert.Equal(t, "চছজঝঞ", remainingGot)
 	assert.Equal(t, true, gotCompleteWord)

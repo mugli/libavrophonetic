@@ -20,7 +20,7 @@ func Example() {
 		fmt.Println(word)
 	}
 
-	// Output:
+	// Unordered Output:
 	// বাংলা
 	// বাংলাদেশ
 	// বাংলাদেশের
