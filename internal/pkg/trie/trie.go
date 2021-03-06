@@ -83,9 +83,9 @@ func (root *Node) findLongestPrefixNode(prefix string) (matchedNode *Node, match
 	return
 }
 
-// findCompleteWords starts with the current Node and recursively traverse
+// findCompleteWordsInChildren starts with the current Node and recursively traverse
 // the Trie to find all the complete words from the closest children.
-func (root *Node) findCompleteWords() (result []string) {
+func (root *Node) findCompleteWordsInChildren() (result []string) {
 	for key := range root.Children {
 		node := root.Children[key]
 
@@ -93,7 +93,7 @@ func (root *Node) findCompleteWords() (result []string) {
 			result = append(result, node.CompleteWord)
 		}
 
-		completeWords := node.findCompleteWords()
+		completeWords := node.findCompleteWordsInChildren()
 		result = append(result, completeWords...)
 	}
 
@@ -130,20 +130,26 @@ func (trie *Trie) AddWord(word string) {
 }
 
 // MatchPrefix finds all the words in a trie that starts with the prefix.
-func (trie *Trie) MatchPrefix(prefix string) (result []string) {
+func (trie *Trie) MatchPrefix(prefix string) []string {
+	result := make([]string, 0)
+
 	if prefix == "" {
-		return
+		return result
 	}
 
 	node, _ := trie.Root.findLongestPrefixNode(prefix)
 
 	if node == nil {
-		return
+		return result
 	}
 
-	result = node.findCompleteWords()
+	result = node.findCompleteWordsInChildren()
 
-	return
+	if node.IsCompleteWord() {
+		result = append(result, node.CompleteWord)
+	}
+
+	return result
 }
 
 // MatchLongestCommonPrefix finds the node with similar longest prefix of the input,
@@ -151,6 +157,8 @@ func (trie *Trie) MatchPrefix(prefix string) (result []string) {
 // The returned isMatchCompleteWord is true when the match is also a complete entry in the Trie.
 func (trie *Trie) MatchLongestCommonPrefix(prefix string) (matchedPrefix string, remaining string,
 	isMatchCompleteWord bool, node *Node) {
+	remaining = prefix
+
 	if prefix == "" {
 		return
 	}
