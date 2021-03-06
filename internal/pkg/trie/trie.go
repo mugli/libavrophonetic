@@ -3,6 +3,7 @@ package trie
 
 import (
 	"encoding/gob"
+	"fmt"
 	"io"
 )
 
@@ -39,9 +40,9 @@ func (root *Node) FindMatchingNode(word string) *Node {
 
 		if node == nil {
 			return nil
-		} else {
-			result = node
 		}
+
+		result = node
 	}
 
 	return result
@@ -64,6 +65,7 @@ func (root *Node) findLongestPrefixNode(prefix string) (matchedNode *Node, match
 			// No match at the beginning
 			matchedNode = nil
 			matchedPrefix = ""
+
 			return
 		}
 
@@ -77,10 +79,12 @@ func (root *Node) findLongestPrefixNode(prefix string) (matchedNode *Node, match
 
 	matchedNode = result
 	matchedPrefix = string(matchedKeys)
+
 	return
 }
 
-// findCompleteWords starts with the current Node and recursively traverse the Trie to find all the complete words from the closest children.
+// findCompleteWords starts with the current Node and recursively traverse
+// the Trie to find all the complete words from the closest children.
 func (root *Node) findCompleteWords() (result []string) {
 	for key := range root.Children {
 		node := root.Children[key]
@@ -138,12 +142,15 @@ func (trie *Trie) MatchPrefix(prefix string) (result []string) {
 	}
 
 	result = node.findCompleteWords()
+
 	return
 }
 
-// MatchLongestCommonPrefix finds the node with similar longest prefix of the input, with additional information like remaining string it couldn't match.
+// MatchLongestCommonPrefix finds the node with similar longest prefix of the input,
+// with additional information like remaining string it couldn't match.
 // The returned isMatchCompleteWord is true when the match is also a complete entry in the Trie.
-func (trie *Trie) MatchLongestCommonPrefix(prefix string) (matchedPrefix string, remaining string, isMatchCompleteWord bool, node *Node) {
+func (trie *Trie) MatchLongestCommonPrefix(prefix string) (matchedPrefix string, remaining string,
+	isMatchCompleteWord bool, node *Node) {
 	if prefix == "" {
 		return
 	}
@@ -162,8 +169,9 @@ func (trie *Trie) MatchLongestCommonPrefix(prefix string) (matchedPrefix string,
 func (trie *Trie) LoadFromGob(r io.Reader) error {
 	decoder := gob.NewDecoder(r)
 	err := decoder.Decode(trie)
+
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to deserialize trie: %w", err)
 	}
 
 	return nil
@@ -173,8 +181,9 @@ func (trie *Trie) LoadFromGob(r io.Reader) error {
 func (trie *Trie) SaveToGob(w io.Writer) error {
 	encoder := gob.NewEncoder(w)
 	err := encoder.Encode(trie)
+
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to serialize trie: %w", err)
 	}
 
 	return nil

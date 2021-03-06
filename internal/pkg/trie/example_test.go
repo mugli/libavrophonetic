@@ -39,7 +39,8 @@ func Example_matchLongestCommonPrefix() {
 	matchedPrefix, remaining, isMatchCompleteWord, _ := t.MatchLongestCommonPrefix("বাংলার")
 	fmt.Println("matchedPrefix ==", matchedPrefix)
 	fmt.Println("remaining ==", remaining)
-	fmt.Println("isMatchCompleteWord ==", isMatchCompleteWord) // isMatchCompleteWord is true when the match is also a complete entry in the Trie
+	// isMatchCompleteWord is true when the match is also a complete entry in the Trie
+	fmt.Println("isMatchCompleteWord ==", isMatchCompleteWord)
 
 	// Output:
 	// matchedPrefix == বাংলা
