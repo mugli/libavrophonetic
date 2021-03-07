@@ -79,7 +79,7 @@ var sourcePatterns = []pattern{
 						value: "`",
 					},
 				},
-				thenReplace: "য়া",
+				thenReplace: bnYYA + "া",
 			},
 			{
 				ifAllMatch: []matchCondition{
@@ -1076,15 +1076,15 @@ var sourcePatterns = []pattern{
 	},
 	{
 		match:   "Rg",
-		replace: "ড়্গ",
+		replace: bnRRA + "্গ",
 	},
 	{
 		match:   "Rh",
-		replace: "ঢ়",
+		replace: bnRHA,
 	},
 	{
 		match:   "R",
-		replace: "ড়",
+		replace: bnRRA,
 	},
 	{
 		match:   "r",
@@ -1678,7 +1678,7 @@ var sourcePatterns = []pattern{
 						is:   notPunctuation,
 					},
 				},
-				thenReplace: "য়",
+				thenReplace: bnYYA,
 			},
 			{
 				ifAllMatch: []matchCondition{
@@ -1687,13 +1687,13 @@ var sourcePatterns = []pattern{
 						is:   punctuation,
 					},
 				},
-				thenReplace: "ইয়",
+				thenReplace: "ই" + bnYYA,
 			},
 		},
 	},
 	{
 		match:   "Y",
-		replace: "য়",
+		replace: bnYYA,
 	},
 	{
 		match:   "q",
@@ -1714,7 +1714,7 @@ var sourcePatterns = []pattern{
 						is:   vowel,
 					},
 				},
-				thenReplace: "ওয়",
+				thenReplace: "ও" + bnYYA,
 			},
 			{
 				ifAllMatch: []matchCondition{

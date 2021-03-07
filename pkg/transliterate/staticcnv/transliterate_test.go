@@ -1,54 +1,71 @@
 package staticcnv_test
 
 import (
+	"bufio"
 	"github.com/mugli/libAvroPhonetic/pkg/transliterate/staticcnv"
 	"github.com/stretchr/testify/assert"
+	"os"
+	"strings"
 	"testing"
 )
 
-func TestConvertWord(t *testing.T) {
-	tests := []struct {
-		input string
-		want  string
-	}{
-		{
-			input: "amar",
-			want:  "আমার",
-		},
-		{
-			input: "a",
-			want:  "আ",
-		},
-		{
-			input: "ia",
-			want:  "ইয়া",
-		},
-		{
-			input: "a`",
-			want:  "া",
-		},
-		{
-			input: "R",
-			want:  "ড়",
-		},
-		{
-			input: "Rh",
-			want:  "ঢ়",
-		},
-		{
-			input: "bou",
-			want:  "বউ",
-		},
-		{
-			input: "bOU",
-			want:  "বৌ",
-		},
+type testCase struct {
+	input string
+	want string
+}
+
+func buildTestCases() ([]testCase, error) {
+	f, err := os.OpenFile("testcases.txt", os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+
+	retval := make([]testCase, 0)
+
+	sc := bufio.NewScanner(f)
+	for sc.Scan() {
+		line := strings.TrimSpace(sc.Text())
+
+		if line != "" && !strings.HasPrefix(line, "#") {
+			parts := strings.Split(line, " ")
+
+			tc := testCase{
+				input: parts[0],
+				want: parts[1],
+			}
+
+			retval = append(retval, tc)
+		}
+	}
+	if err := sc.Err(); err != nil {
+		return nil, err
 	}
 
-	for _, testCase := range tests {
+	return retval, nil
+}
+
+func TestConvertWord(t *testing.T) {
+	testCases, err := buildTestCases()
+	assert.NoError(t, err)
+
+	for _, testCase := range testCases {
 		t.Run(testCase.input, func(t *testing.T) {
 			got := staticcnv.ConvertWord(testCase.input)
 			assert.Equal(t, testCase.want, got)
 		})
+	}
+}
+
+func BenchmarkConvertWord(b *testing.B) {
+	testCases, _ := buildTestCases()
+
+	b.ResetTimer()
+	b.ReportAllocs()
+
+	for i := 0; i < b.N; i++ {
+		for _, testCase := range testCases {
+			staticcnv.ConvertWord(testCase.input)
+		}
 	}
 }
