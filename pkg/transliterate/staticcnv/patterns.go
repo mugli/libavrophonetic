@@ -26,7 +26,7 @@ type matchCondition struct {
 var sortedPatterns = preprocessPatterns(sourcePatterns)
 
 func preprocessPatterns(patterns []pattern) []pattern {
-	sortedPatterns := sortPatternsByDescLen(patterns)
+	sortedPatterns := sortPatternsByDescendingLength(patterns)
 	processNegativeConditions(&sortedPatterns)
 
 	return sortedPatterns
@@ -1776,8 +1776,9 @@ var sourcePatterns = []pattern{
 	},
 }
 
-func sortPatternsByDescLen(patterns []pattern) []pattern {
+func sortPatternsByDescendingLength(patterns []pattern) []pattern {
 	var retval = make([]pattern, len(patterns))
+
 	copy(retval, patterns)
 
 	sort.Slice(retval, func(i, j int) bool {

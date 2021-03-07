@@ -2,6 +2,7 @@ package staticcnv_test
 
 import (
 	"fmt"
+
 	"github.com/mugli/libAvroPhonetic/pkg/transliterate/staticcnv"
 )
 

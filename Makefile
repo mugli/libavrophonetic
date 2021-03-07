@@ -1,12 +1,15 @@
 download:
 	go mod download
+	go mod tidy
 
-install-tools: download
-	@echo Installing tools from tools.go
-	cat tools/tools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
+install-build-tools: download
+	@echo Installing tools from buildtools.go
+	cat buildtools/buildtools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
+	go mod tidy
 
 format-all:
 	go fmt ./...
+	gci -w .
 
 lint: format-all
 	golangci-lint run ./...
@@ -28,5 +31,5 @@ test-cover:
 vet:
 	go vet ./...
 
-build: download install-tools lint test vet
+build: download install-build-tools lint test vet
 	go build ./...

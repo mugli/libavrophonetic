@@ -2,9 +2,10 @@ package trie_test
 
 import (
 	"bytes"
+	"testing"
+
 	"github.com/mugli/libAvroPhonetic/internal/pkg/trie"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func buildTrie(entries []string) *trie.Trie {

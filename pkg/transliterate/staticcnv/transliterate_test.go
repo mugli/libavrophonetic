@@ -2,16 +2,17 @@ package staticcnv_test
 
 import (
 	"bufio"
-	"github.com/mugli/libAvroPhonetic/pkg/transliterate/staticcnv"
-	"github.com/stretchr/testify/assert"
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/mugli/libAvroPhonetic/pkg/transliterate/staticcnv"
+	"github.com/stretchr/testify/assert"
 )
 
 type testCase struct {
 	input string
-	want string
+	want  string
 }
 
 func buildTestCases() ([]testCase, error) {
@@ -32,12 +33,13 @@ func buildTestCases() ([]testCase, error) {
 
 			tc := testCase{
 				input: parts[0],
-				want: parts[1],
+				want:  parts[1],
 			}
 
 			retval = append(retval, tc)
 		}
 	}
+
 	if err := sc.Err(); err != nil {
 		return nil, err
 	}
