@@ -1,9 +1,11 @@
+// Package staticcnv provides Avro Phonetic (Classic) transliterator to convert English characters to Bengali
 package staticcnv
 
 import (
 	"unicode"
 )
 
+// ConvertWord transliterates from English characters to Bengali, one word at a time
 func ConvertWord(word string) string {
 	var output string
 
