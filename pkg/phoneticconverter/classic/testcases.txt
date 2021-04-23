@@ -1,6 +1,7 @@
 # patterns with a
 a আ
 ia ইয়া
+(a (আ
 (a` (া
 aa আআ
 aa` আা

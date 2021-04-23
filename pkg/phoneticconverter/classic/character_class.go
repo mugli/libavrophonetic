@@ -1,4 +1,4 @@
-package staticcnv
+package classic
 
 import (
 	"unicode"

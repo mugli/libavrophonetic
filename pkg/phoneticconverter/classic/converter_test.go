@@ -1,4 +1,4 @@
-package staticcnv_test
+package classic_test
 
 import (
 	"bufio"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mugli/libAvroPhonetic/pkg/transliterate/staticcnv"
+	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/classic"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -48,18 +48,20 @@ func buildTestCases() ([]testCase, error) {
 }
 
 func TestConvertWord(t *testing.T) {
+	converter := classic.NewConverter()
 	testCases, err := buildTestCases()
 	assert.NoError(t, err)
 
 	for _, testCase := range testCases {
 		t.Run(testCase.input, func(t *testing.T) {
-			got := staticcnv.ConvertWord(testCase.input)
+			got := converter.ConvertWord(testCase.input)
 			assert.Equal(t, testCase.want, got)
 		})
 	}
 }
 
 func BenchmarkConvertWord(b *testing.B) {
+	converter := classic.NewConverter()
 	testCases, _ := buildTestCases()
 
 	b.ResetTimer()
@@ -67,7 +69,7 @@ func BenchmarkConvertWord(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		for _, testCase := range testCases {
-			staticcnv.ConvertWord(testCase.input)
+			converter.ConvertWord(testCase.input)
 		}
 	}
 }

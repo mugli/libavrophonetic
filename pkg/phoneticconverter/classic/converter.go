@@ -1,14 +1,26 @@
-// Package staticcnv provides Avro Phonetic (Classic) transliterator to convert English characters to Bengali
-package staticcnv
+// Package classic provides Avro Phonetic Classic converter to convert English string to similar sounding Bengali string
+package classic
 
 import (
 	"unicode"
 )
 
-// ConvertWord transliterates from English characters to Bengali, one word at a time
+// Converter is a classic (fixed/static) Avro Phonetic converter
+type Converter struct {
+	patterns *patterns
+}
+
+// NewConverter returns an initialized classic (fixed/static) Avro Phonetic converter
+func NewConverter() *Converter {
+	return &Converter{
+		patterns: newPatterns(),
+	}
+}
+
+// ConvertWord transliterates from English string to similar sounding Bengali string
 //nolint:funlen
 //nolint:gocognit
-func ConvertWord(word string) string {
+func (phonetic *Converter) ConvertWord(word string) string {
 	var output string
 
 	input := fixCase(word)
@@ -18,7 +30,7 @@ func ConvertWord(word string) string {
 		startPos := i
 		hasMatched := false
 
-		for _, pattern := range sortedPatterns {
+		for _, pattern := range *(phonetic.patterns) {
 			rightPos = i + len(pattern.match)
 
 			if (rightPos <= len(input)) && string(input[startPos:rightPos]) == pattern.match { //nolint:nestif

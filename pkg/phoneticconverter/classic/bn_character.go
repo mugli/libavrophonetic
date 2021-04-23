@@ -1,4 +1,4 @@
-package staticcnv
+package classic
 
 const bnRRA = "\u09dc" // ড়
 const bnRHA = "\u09dd" // ঢ়

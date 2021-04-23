@@ -1,4 +1,4 @@
-package staticcnv
+package classic
 
 import (
 	"sort"
@@ -23,14 +23,50 @@ type matchCondition struct {
 	isNot bool
 }
 
-var sortedPatterns = preprocessPatterns(sourcePatterns)
+type patterns []pattern
 
-func preprocessPatterns(patterns []pattern) []pattern {
-	sortedPatterns := sortPatternsByDescendingLength(patterns)
-	processNegativeConditions(&sortedPatterns)
+func newPatterns() *patterns {
+	var patternsCopy = make(patterns, len(sourcePatterns))
+	copy(patternsCopy, sourcePatterns)
 
-	return sortedPatterns
+	patterns := &patternsCopy
+	// The converter algorithm depends on patterns being sorted by descending order of match length.
+	// It's hard to maintain that manually when we design sourcePatterns, so we don't enforce it there and
+	// do the sorting when we initialize the patterns from the sourcePatterns.
+	patterns.sortPatternsByDescendingLength()
+
+	// Set matchCondition.isNot boolean property based on the presence of ! character in matchCondition.is to speed up conversion
+	patterns.updateNegativeConditions()
+
+	return patterns
 }
+
+func (patterns *patterns) sortPatternsByDescendingLength() {
+	sort.Slice(*patterns, func(i, j int) bool {
+		return len((*patterns)[i].match) > len((*patterns)[j].match)
+	})
+}
+
+func (patterns *patterns) updateNegativeConditions() {
+	for i := 0; i < len(*patterns); i++ {
+		pattern := (*patterns)[i]
+
+		for j := 0; j < len(pattern.exceptions); j++ {
+			exception := &pattern.exceptions[j]
+
+			for k := 0; k < len(exception.ifAllMatch); k++ {
+				matchCondition := &exception.ifAllMatch[k]
+
+				matchCondition.isNot = false
+				if strings.HasPrefix(matchCondition.is, "!") {
+					matchCondition.isNot = true
+					matchCondition.is = matchCondition.is[1:]
+				}
+			}
+		}
+	}
+}
+
 
 const suffix = "suffix"
 const prefix = "prefix"
@@ -1776,34 +1812,4 @@ var sourcePatterns = []pattern{
 	},
 }
 
-func sortPatternsByDescendingLength(patterns []pattern) []pattern {
-	var retval = make([]pattern, len(patterns))
 
-	copy(retval, patterns)
-
-	sort.Slice(retval, func(i, j int) bool {
-		return len(retval[i].match) > len(retval[j].match)
-	})
-
-	return retval
-}
-
-func processNegativeConditions(patterns *[]pattern) {
-	for i := 0; i < len(*patterns); i++ {
-		pattern := (*patterns)[i]
-
-		for j := 0; j < len(pattern.exceptions); j++ {
-			exception := &pattern.exceptions[j]
-
-			for k := 0; k < len(exception.ifAllMatch); k++ {
-				matchCondition := &exception.ifAllMatch[k]
-
-				matchCondition.isNot = false
-				if strings.HasPrefix(matchCondition.is, "!") {
-					matchCondition.isNot = true
-					matchCondition.is = matchCondition.is[1:]
-				}
-			}
-		}
-	}
-}

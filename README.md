@@ -2,7 +2,7 @@
 
 Work in progress.
 
-The goal is to create a completely rewritten reference implementation of classic (static) and dictionary based transliterators for Avro Phonetic.
+The goal is to create a completely rewritten reference implementation of classic (fixed) and dictionary based transliterators for Avro Phonetic.
 
 Design goals:
 - Cross platform, reusable lib.
