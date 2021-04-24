@@ -1,4 +1,4 @@
-# libAvroPhonetic
+# libavrophonetic
 
 Work in progress.
 
