@@ -2,11 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/dictionary/types"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/dictionary/types"
 )
 
 func saveBinPatternsData() {
@@ -34,7 +35,7 @@ func saveBinPatternsData() {
 	log.Println("Saved generated pattern dictionary.")
 }
 
-func loadGeneratedJSONPatterns() (dataPatterns map[string]patternBlockPreprocessed){
+func loadGeneratedJSONPatterns() (dataPatterns map[string]patternBlockPreprocessed) {
 	inputFilePath, err := filepath.Abs(filepath.Join(dataDirectory, patternsGeneratedFileName))
 	if err != nil {
 		log.Fatal(err)
@@ -54,7 +55,7 @@ func loadGeneratedJSONPatterns() (dataPatterns map[string]patternBlockPreprocess
 
 	json.Unmarshal(byteVal, &dataPatterns)
 
-	log.Printf("Loaded patterns from pre-processed JSON. Total: %d \n",len(dataPatterns))
+	log.Printf("Loaded patterns from pre-processed JSON. Total: %d \n", len(dataPatterns))
 
 	return
 }

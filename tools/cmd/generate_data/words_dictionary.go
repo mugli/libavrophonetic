@@ -2,10 +2,11 @@ package main
 
 import (
 	"bufio"
-	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/dictionary/types"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/dictionary/types"
 )
 
 func saveBinWordData() {

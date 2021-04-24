@@ -3,8 +3,9 @@ package types
 import (
 	"encoding/gob"
 	"fmt"
-	"github.com/mugli/libAvroPhonetic/internal/pkg/trie"
 	"io"
+
+	"github.com/mugli/libAvroPhonetic/internal/pkg/trie"
 )
 
 type PatternBlock struct {
@@ -17,7 +18,7 @@ type Patterns struct {
 	Dict map[string]PatternBlock
 }
 
-func NewPatterns() *Patterns{
+func NewPatterns() *Patterns {
 	return &Patterns{
 		Trie: trie.NewTrie(),
 		Dict: make(map[string]PatternBlock),
@@ -52,7 +53,7 @@ type Words struct {
 	Trie *trie.Trie
 }
 
-func NewWords() *Words{
+func NewWords() *Words {
 	return &Words{
 		Trie: trie.NewTrie(),
 	}
@@ -81,8 +82,3 @@ func (words *Words) SaveToGob(w io.Writer) error {
 
 	return nil
 }
-
-
-
-
-

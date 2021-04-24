@@ -2,11 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/wzshiming/crun"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/wzshiming/crun"
 )
 
 type patternBlockSource struct {

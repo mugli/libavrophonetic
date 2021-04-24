@@ -166,5 +166,3 @@ func (trie *Trie) MatchLongestCommonPrefix(prefix string) (matchedPrefix string,
 
 	return
 }
-
-

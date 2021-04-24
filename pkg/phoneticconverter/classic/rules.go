@@ -67,8 +67,3 @@ func (rules *rules) updateNegativeConditions() {
 		}
 	}
 }
-
-
-
-
-

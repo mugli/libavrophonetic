@@ -15,7 +15,7 @@ If you arbitrarily change them, they are no longer "Avro Phonetic".
 
 - It's more important to write the test-cases to check if as a whole Avro Phonetic conversion is working as
 expected from the user's perspective.
- */
+*/
 
 const suffix = "suffix"
 const prefix = "prefix"
