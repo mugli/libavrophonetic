@@ -1,7 +1,6 @@
 package trie_test
 
 import (
-	"bytes"
 	"testing"
 
 	"github.com/mugli/libAvroPhonetic/internal/pkg/trie"
@@ -148,32 +147,6 @@ func TestTrie_MatchLongestCommonPrefix(t *testing.T) {
 			assert.Equal(t, testCase.nodeIsNil, node == nil)
 		})
 	}
-}
-
-func TestTrie_Serialization(t *testing.T) {
-	tree := buildTrie([]string{
-		"ক", "কখগ", "কখগঘঙ",
-		"চ", "চছজ", "চছজঝঞ",
-		"১",
-	})
-
-	buf := new(bytes.Buffer)
-	err := tree.SaveToGob(buf)
-	assert.NoError(t, err)
-
-	deserializedTree := trie.NewTrie()
-	err = deserializedTree.LoadFromGob(buf)
-	assert.NoError(t, err)
-
-	partialNode := deserializedTree.Root.FindMatchingNode("কখগঘ")
-	assert.NotNil(t, partialNode)
-	assert.False(t, partialNode.IsCompleteWord())
-
-	matchedPrefixGot, remainingGot, gotCompleteWord, node := deserializedTree.MatchLongestCommonPrefix("কখগঘঙচছজঝঞ")
-	assert.Equal(t, "কখগঘঙ", matchedPrefixGot)
-	assert.Equal(t, "চছজঝঞ", remainingGot)
-	assert.Equal(t, true, gotCompleteWord)
-	assert.Equal(t, false, node == nil)
 }
 
 func BenchmarkTrie_MatchLongestCommonPrefix(b *testing.B) {

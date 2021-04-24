@@ -1,12 +1,6 @@
 // Package trie implements a rune Trie (https://en.wikipedia.org/wiki/Trie).
 package trie
 
-import (
-	"encoding/gob"
-	"fmt"
-	"io"
-)
-
 // Node is an element of the Trie.
 type Node struct {
 	Children map[rune]*Node
@@ -173,26 +167,4 @@ func (trie *Trie) MatchLongestCommonPrefix(prefix string) (matchedPrefix string,
 	return
 }
 
-// LoadFromGob deserializes a Trie encoded as gob ("encoding/gob").
-func (trie *Trie) LoadFromGob(r io.Reader) error {
-	decoder := gob.NewDecoder(r)
-	err := decoder.Decode(trie)
 
-	if err != nil {
-		return fmt.Errorf("failed to deserialize trie: %w", err)
-	}
-
-	return nil
-}
-
-// SaveToGob serializes a Trie as gob ("encoding/gob").
-func (trie *Trie) SaveToGob(w io.Writer) error {
-	encoder := gob.NewEncoder(w)
-	err := encoder.Encode(trie)
-
-	if err != nil {
-		return fmt.Errorf("failed to serialize trie: %w", err)
-	}
-
-	return nil
-}

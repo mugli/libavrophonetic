@@ -31,5 +31,8 @@ test-cover:
 vet:
 	go vet ./...
 
+generate-data:
+	go run ./tools/cmd/generate_data/ -data-directory=./data
+
 build: download install-build-tools lint test vet
 	go build ./...
