@@ -1,4 +1,4 @@
-package classic
+package rulebased
 
 // To make things simpler, Avro Phonetic tries to produce output always in the NFC form (See Unicode normalization).
 // Code Editors often break it to canonically equivalent NFD form. To avoid that decomposing, we define

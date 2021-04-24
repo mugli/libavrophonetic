@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/dictionary/types"
+	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/databased/types"
 )
 
 func saveBinWordData() {
@@ -27,23 +27,23 @@ func saveBinWordData() {
 		log.Fatal(err)
 	}
 
-	log.Printf("Generated word dictionary will be saved to: %s\n", generatedFileName)
+	log.Printf("Generated word databased will be saved to: %s\n", generatedFileName)
 	outFile, err := os.Create(generatedFileName)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer outFile.Close()
 
-	log.Println("Saving word dictionary.")
+	log.Println("Saving word databased.")
 	err = words.SaveToGob(outFile)
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println("Saved generated word dictionary.")
+	log.Println("Saved generated word databased.")
 }
 
 func loadSourceWordDictionary(filepath string) (words []string) {
-	log.Printf("Loading source word dictionary: %s\n", filepath)
+	log.Printf("Loading source word databased: %s\n", filepath)
 	file, err := os.Open(filepath)
 	if err != nil {
 		log.Fatal(err)
@@ -58,7 +58,7 @@ func loadSourceWordDictionary(filepath string) (words []string) {
 		log.Fatal(err)
 	}
 
-	log.Printf("Loaded source word dictionary. Total: %d enties.\n", len(words))
+	log.Printf("Loaded source word databased. Total: %d enties.\n", len(words))
 
 	return
 }

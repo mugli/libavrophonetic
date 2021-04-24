@@ -1,4 +1,4 @@
-package classic_test
+package rulebased_test
 
 import (
 	"bufio"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/classic"
+	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/rulebased"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -48,7 +48,7 @@ func buildTestCases() ([]testCase, error) {
 }
 
 func TestConvertWord(t *testing.T) {
-	converter := classic.NewConverter()
+	converter := rulebased.NewConverter()
 	testCases, err := buildTestCases()
 	assert.NoError(t, err)
 
@@ -61,7 +61,7 @@ func TestConvertWord(t *testing.T) {
 }
 
 func BenchmarkConvertWord(b *testing.B) {
-	converter := classic.NewConverter()
+	converter := rulebased.NewConverter()
 	testCases, _ := buildTestCases()
 
 	b.ResetTimer()

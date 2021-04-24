@@ -1,16 +1,16 @@
-// Package classic provides Avro Phonetic Classic (rule-based) converter to convert English string to similar sounding Bengali string
-package classic
+// Package rulebased provides Avro Phonetic Classic (rule-based) converter to convert English string to similar sounding Bengali string
+package rulebased
 
 import (
 	"unicode"
 )
 
-// Converter is a classic (rule-based) Avro Phonetic converter
+// Converter is a rule-based (classic) Avro Phonetic converter
 type Converter struct {
 	rules *rules
 }
 
-// NewConverter returns an initialized classic (rule-based) Avro Phonetic converter
+// NewConverter returns an initialized rule-based (classic) Avro Phonetic converter
 func NewConverter() *Converter {
 	return &Converter{
 		rules: newRules(),

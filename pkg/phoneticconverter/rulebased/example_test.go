@@ -1,13 +1,13 @@
-package classic_test
+package rulebased_test
 
 import (
 	"fmt"
 
-	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/classic"
+	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/rulebased"
 )
 
 func ExampleConvertWord() {
-	converter := classic.NewConverter()
+	converter := rulebased.NewConverter()
 	output := converter.ConvertWord("bangla")
 	fmt.Println(output)
 
