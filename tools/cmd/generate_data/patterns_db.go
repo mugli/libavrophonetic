@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/databased/types"
+	"github.com/mugli/libAvroPhonetic/pkg/converter/databasedcnv/types"
 )
 
 func saveBinPatternsData() {
@@ -18,7 +18,7 @@ func saveBinPatternsData() {
 		log.Fatal(err)
 	}
 
-	log.Printf("Generated pattern databased will be saved to: %s\n", outFilePath)
+	log.Printf("Generated pattern db will be saved to: %s\n", outFilePath)
 	outFile, err := os.Create(outFilePath)
 
 	if err != nil {
@@ -26,13 +26,13 @@ func saveBinPatternsData() {
 	}
 	defer outFile.Close()
 
-	log.Println("Saving pattern databased.")
+	log.Println("Saving pattern db.")
 	err = patterns.SaveToGob(outFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	log.Println("Saved generated pattern databased.")
+	log.Println("Saved generated pattern db.")
 }
 
 func loadCommonPatterns() (commonPatterns []string) {

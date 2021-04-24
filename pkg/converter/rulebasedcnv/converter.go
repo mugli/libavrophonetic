@@ -1,5 +1,5 @@
-// Package rulebased provides Avro Phonetic Classic (rule-based) converter to convert English string to similar sounding Bengali string
-package rulebased
+// Package rulebasedcnv provides Avro Phonetic Classic (rule-based) converter to convert English string to similar sounding Bengali string
+package rulebasedcnv
 
 import (
 	"unicode"

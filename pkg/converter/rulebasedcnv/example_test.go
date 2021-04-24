@@ -1,13 +1,13 @@
-package rulebased_test
+package rulebasedcnv_test
 
 import (
 	"fmt"
 
-	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/rulebased"
+	"github.com/mugli/libAvroPhonetic/pkg/converter/rulebasedcnv"
 )
 
 func ExampleConvertWord() {
-	converter := rulebased.NewConverter()
+	converter := rulebasedcnv.NewConverter()
 	output := converter.ConvertWord("bangla")
 	fmt.Println(output)
 

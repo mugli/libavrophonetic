@@ -1,4 +1,4 @@
-package rulebased_test
+package rulebasedcnv_test
 
 import (
 	"bufio"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mugli/libAvroPhonetic/pkg/phoneticconverter/rulebased"
+	"github.com/mugli/libAvroPhonetic/pkg/converter/rulebasedcnv"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -48,7 +48,7 @@ func buildTestCases() ([]testCase, error) {
 }
 
 func TestConvertWord(t *testing.T) {
-	converter := rulebased.NewConverter()
+	converter := rulebasedcnv.NewConverter()
 	testCases, err := buildTestCases()
 	assert.NoError(t, err)
 
@@ -61,7 +61,7 @@ func TestConvertWord(t *testing.T) {
 }
 
 func BenchmarkConvertWord(b *testing.B) {
-	converter := rulebased.NewConverter()
+	converter := rulebasedcnv.NewConverter()
 	testCases, _ := buildTestCases()
 
 	b.ResetTimer()

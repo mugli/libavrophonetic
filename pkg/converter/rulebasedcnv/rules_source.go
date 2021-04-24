@@ -1,4 +1,4 @@
-package rulebased
+package rulebasedcnv
 
 /*
 Note:
