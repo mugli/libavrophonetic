@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/mugli/libAvroPhonetic/pkg/databasedcnv/types"
+	"github.com/mugli/libavrophonetic/pkg/databasedcnv"
 )
 
 func saveBinPatternsData() {
@@ -89,14 +89,14 @@ func loadGeneratedJSONPatterns() (dataPatterns map[string]patternBlockPreprocess
 	return
 }
 
-func generatePatternTrie() *types.Patterns {
-	retval := types.NewPatterns()
+func generatePatternTrie() *databasedcnv.Patterns {
+	retval := databasedcnv.NewPatterns()
 
 	dataPatterns := loadGeneratedJSONPatterns()
 
 	for key, p := range dataPatterns {
 		retval.Trie.AddWord(key)
-		retval.Dict[key] = types.PatternBlock{
+		retval.Dict[key] = databasedcnv.PatternBlock{
 			Transliterate:       p.Transliterate,
 			EntireBlockOptional: p.EntireBlockOptional,
 		}

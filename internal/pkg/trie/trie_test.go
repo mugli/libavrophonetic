@@ -3,7 +3,7 @@ package trie_test
 import (
 	"testing"
 
-	"github.com/mugli/libAvroPhonetic/internal/pkg/trie"
+	"github.com/mugli/libavrophonetic/internal/pkg/trie"
 	"github.com/stretchr/testify/assert"
 )
 

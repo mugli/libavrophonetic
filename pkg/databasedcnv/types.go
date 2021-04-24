@@ -1,11 +1,11 @@
-package types
+package databasedcnv
 
 import (
 	"encoding/gob"
 	"fmt"
 	"io"
 
-	"github.com/mugli/libAvroPhonetic/internal/pkg/trie"
+	"github.com/mugli/libavrophonetic/internal/pkg/trie"
 )
 
 type PatternBlock struct {

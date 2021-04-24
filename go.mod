@@ -1,4 +1,4 @@
-module github.com/mugli/libAvroPhonetic
+module github.com/mugli/libavrophonetic
 
 go 1.16
 
