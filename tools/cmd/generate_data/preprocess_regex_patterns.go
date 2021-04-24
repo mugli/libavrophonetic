@@ -42,7 +42,7 @@ func saveRegexPatternsFromSource() {
 		log.Fatal(err)
 	}
 
-	destFileName, err := filepath.Abs(filepath.Join(dataDirectory, patternsGeneratedFileName))
+	destFileName, err := filepath.Abs(filepath.Join(dataDirectory, patternsPreprocessedFileName))
 	if err != nil {
 		log.Fatal(err)
 	}

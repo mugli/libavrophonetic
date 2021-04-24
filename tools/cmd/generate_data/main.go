@@ -11,7 +11,7 @@ const (
 	wordsSourceFileName       = "source-words.txt"
 	wordsBinFileName          = "generated-words.gob"
 	patternsSourceFileName    = "source-regex-patterns.json"
-	patternsGeneratedFileName = "generated-patterns.json"
+	patternsPreprocessedFileName = "preprocessed-patterns.json"
 	patternsBinFileName       = "generated-patterns.gob"
 )
 

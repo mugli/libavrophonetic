@@ -36,7 +36,7 @@ func saveBinPatternsData() {
 }
 
 func loadGeneratedJSONPatterns() (dataPatterns map[string]patternBlockPreprocessed) {
-	inputFilePath, err := filepath.Abs(filepath.Join(dataDirectory, patternsGeneratedFileName))
+	inputFilePath, err := filepath.Abs(filepath.Join(dataDirectory, patternsPreprocessedFileName))
 	if err != nil {
 		log.Fatal(err)
 	}
