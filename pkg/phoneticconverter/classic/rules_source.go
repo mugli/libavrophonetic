@@ -1,72 +1,21 @@
 package classic
 
-import (
-	"sort"
-	"strings"
-)
+/*
+Note:
+Many re-implementation of Avro Classic Phonetic saw the JavaScript implementation
+(https://github.com/torifat/jsAvroPhonetic/blob/master/src/avro-lib.js) and thought it might be a better idea to extract
+the rules in a separate JSON file to make Avro Phonetic more configurable by the users. But I am going to keep it hardcoded like this.
 
-type pattern struct {
-	match      string
-	replace    string
-	exceptions []exception
-}
+Reasons:
+- In practice, that customization never happened. These rules are complex and may lead to subtle errors and end users
+never want that kind of configurability.
 
-type exception struct {
-	ifAllMatch  []matchCondition
-	thenReplace string
-}
+- Moreover, these rules are also associated with the muscle memory of the Avro Keyboard (IME) users.
+If you arbitrarily change them, they are no longer "Avro Phonetic".
 
-type matchCondition struct {
-	when  string
-	is    string
-	value string
-	isNot bool
-}
-
-type patterns []pattern
-
-func newPatterns() *patterns {
-	var patternsCopy = make(patterns, len(sourcePatterns))
-	copy(patternsCopy, sourcePatterns)
-
-	patterns := &patternsCopy
-	// The converter algorithm depends on patterns being sorted by descending order of match length.
-	// It's hard to maintain that manually when we design sourcePatterns, so we don't enforce it there and
-	// do the sorting when we initialize the patterns from the sourcePatterns.
-	patterns.sortPatternsByDescendingLength()
-
-	// Set matchCondition.isNot boolean property based on the presence of ! character in matchCondition.is to speed up conversion
-	patterns.updateNegativeConditions()
-
-	return patterns
-}
-
-func (patterns *patterns) sortPatternsByDescendingLength() {
-	sort.Slice(*patterns, func(i, j int) bool {
-		return len((*patterns)[i].match) > len((*patterns)[j].match)
-	})
-}
-
-func (patterns *patterns) updateNegativeConditions() {
-	for i := 0; i < len(*patterns); i++ {
-		pattern := (*patterns)[i]
-
-		for j := 0; j < len(pattern.exceptions); j++ {
-			exception := &pattern.exceptions[j]
-
-			for k := 0; k < len(exception.ifAllMatch); k++ {
-				matchCondition := &exception.ifAllMatch[k]
-
-				matchCondition.isNot = false
-				if strings.HasPrefix(matchCondition.is, "!") {
-					matchCondition.isNot = true
-					matchCondition.is = matchCondition.is[1:]
-				}
-			}
-		}
-	}
-}
-
+- It's more important to write the test-cases to check if as a whole Avro Phonetic conversion is working as
+expected from the user's perspective.
+ */
 
 const suffix = "suffix"
 const prefix = "prefix"
@@ -79,17 +28,30 @@ const notPunctuation = "!punctuation"
 const exactly = "exactly"
 const notExactly = "!exactly"
 
-var sourcePatterns = []pattern{
+var avroClassicPhoneticRules = []rule{
+	// match-replace rules are most basic form of a rule. If we find this match, we replace it with that in the output
+	{
+		// match is always case-sensitive. That's why we use fixCase function on the input string before trying to transliterate them.
+		match:   "bhl",
+		replace: "ভ্ল",
+	},
+	// More complex rules look like this. When we find a match like this , we first check if any exceptions are true.
+	// "thenReplace" from an exception block always gets more priority over plain "replace".
+	// If none of the exception conditions are true, it works as basic match-replace rule.
 	{
 		match:   "a",
 		replace: "া",
 		exceptions: []exception{
 			{
+				// ifAllMatch works as "AND" for all the rules inside it. If all of them are true, "thenReplace" if this block takes place
+				// If any of the condition is false, we move on to the next exception ifAllMatch block.
 				ifAllMatch: []matchCondition{
 					{
 						when: prefix,
 						is:   punctuation,
 					},
+					// The rule is supposed to read like:
+					// (Our current position is "a") and when the suffix (next characters after that) is not exactly "`"
 					{
 						when:  suffix,
 						is:    notExactly,
@@ -133,10 +95,6 @@ var sourcePatterns = []pattern{
 				thenReplace: "আ",
 			},
 		},
-	},
-	{
-		match:   "bhl",
-		replace: "ভ্ল",
 	},
 	{
 		match:   "psh",
@@ -1811,5 +1769,3 @@ var sourcePatterns = []pattern{
 		replace: "",
 	},
 }
-
-

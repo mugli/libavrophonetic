@@ -1,19 +1,19 @@
-// Package classic provides Avro Phonetic Classic converter to convert English string to similar sounding Bengali string
+// Package classic provides Avro Phonetic Classic (rule-based) converter to convert English string to similar sounding Bengali string
 package classic
 
 import (
 	"unicode"
 )
 
-// Converter is a classic (fixed/static) Avro Phonetic converter
+// Converter is a classic (rule-based) Avro Phonetic converter
 type Converter struct {
-	patterns *patterns
+	rules *rules
 }
 
-// NewConverter returns an initialized classic (fixed/static) Avro Phonetic converter
+// NewConverter returns an initialized classic (rule-based) Avro Phonetic converter
 func NewConverter() *Converter {
 	return &Converter{
-		patterns: newPatterns(),
+		rules: newRules(),
 	}
 }
 
@@ -30,13 +30,13 @@ func (phonetic *Converter) ConvertWord(word string) string {
 		startPos := i
 		hasMatched := false
 
-		for _, pattern := range *(phonetic.patterns) {
-			rightPos = i + len(pattern.match)
+		for _, rule := range *(phonetic.rules) {
+			rightPos = i + len(rule.match)
 
-			if (rightPos <= len(input)) && string(input[startPos:rightPos]) == pattern.match { //nolint:nestif
+			if (rightPos <= len(input)) && string(input[startPos:rightPos]) == rule.match { //nolint:nestif
 				leftPos = startPos - 1
 
-				for _, exception := range pattern.exceptions {
+				for _, exception := range rule.exceptions {
 					shouldReplace := true
 					cursor := 0
 
@@ -106,7 +106,7 @@ func (phonetic *Converter) ConvertWord(word string) string {
 				}
 
 				// Default
-				output += pattern.replace
+				output += rule.replace
 				i = rightPos - 1
 				hasMatched = true
 

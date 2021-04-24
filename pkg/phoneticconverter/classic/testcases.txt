@@ -1,4 +1,4 @@
-# patterns with a
+# rules with a
 a আ
 ia ইয়া
 (a (আ
@@ -7,7 +7,7 @@ aa আআ
 aa` আা
 amar আমার
 
-# patterns with periods
+# rules with periods
 . ।
 .. ।।
 ... ...
