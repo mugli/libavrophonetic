@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mugli/libAvroPhonetic/pkg/converter/rulebasedcnv"
+	"github.com/mugli/libAvroPhonetic/pkg/rulebasedcnv"
 	"github.com/stretchr/testify/assert"
 )
 

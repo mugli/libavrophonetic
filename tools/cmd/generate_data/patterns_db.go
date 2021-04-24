@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/mugli/libAvroPhonetic/pkg/converter/databasedcnv/types"
+	"github.com/mugli/libAvroPhonetic/pkg/databasedcnv/types"
 )
 
 func saveBinPatternsData() {

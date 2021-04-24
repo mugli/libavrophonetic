@@ -3,7 +3,7 @@ package rulebasedcnv_test
 import (
 	"fmt"
 
-	"github.com/mugli/libAvroPhonetic/pkg/converter/rulebasedcnv"
+	"github.com/mugli/libAvroPhonetic/pkg/rulebasedcnv"
 )
 
 func ExampleConvertWord() {
