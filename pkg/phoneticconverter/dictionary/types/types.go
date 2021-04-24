@@ -14,14 +14,16 @@ type PatternBlock struct {
 }
 
 type Patterns struct {
-	Trie *trie.Trie
-	Dict map[string]PatternBlock
+	Trie                   *trie.Trie
+	Dict                   map[string]PatternBlock
+	CommonOptionalPatterns []string
 }
 
 func NewPatterns() *Patterns {
 	return &Patterns{
-		Trie: trie.NewTrie(),
-		Dict: make(map[string]PatternBlock),
+		Trie:                   trie.NewTrie(),
+		Dict:                   make(map[string]PatternBlock),
+		CommonOptionalPatterns: make([]string, 0),
 	}
 }
 

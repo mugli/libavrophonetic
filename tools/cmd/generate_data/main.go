@@ -8,11 +8,12 @@ import (
 var dataDirectory string
 
 const (
-	wordsSourceFileName       = "source-words.txt"
-	wordsBinFileName          = "generated-words.gob"
-	patternsSourceFileName    = "source-regex-patterns.json"
+	wordsSourceFileName          = "source-words.txt"
+	wordsBinFileName             = "generated-words.gob"
+	patternsSourceFileName       = "source-regex-patterns.json"
 	patternsPreprocessedFileName = "preprocessed-patterns.json"
-	patternsBinFileName       = "generated-patterns.gob"
+	patternsBinFileName          = "generated-patterns.gob"
+	commonPatternsSourceFileName = "source-common-patterns.json"
 )
 
 func init() {

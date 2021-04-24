@@ -35,6 +35,32 @@ func saveBinPatternsData() {
 	log.Println("Saved generated pattern dictionary.")
 }
 
+func loadCommonPatterns() (commonPatterns []string) {
+	inputFilePath, err := filepath.Abs(filepath.Join(dataDirectory, commonPatternsSourceFileName))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Printf("Loading common patterns: %s\n", inputFilePath)
+	jsonFile, err := os.Open(inputFilePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer jsonFile.Close()
+
+	byteVal, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = json.Unmarshal(byteVal, &commonPatterns)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return
+}
+
 func loadGeneratedJSONPatterns() (dataPatterns map[string]patternBlockPreprocessed) {
 	inputFilePath, err := filepath.Abs(filepath.Join(dataDirectory, patternsPreprocessedFileName))
 	if err != nil {
@@ -53,7 +79,10 @@ func loadGeneratedJSONPatterns() (dataPatterns map[string]patternBlockPreprocess
 		log.Fatal(err)
 	}
 
-	json.Unmarshal(byteVal, &dataPatterns)
+	err = json.Unmarshal(byteVal, &dataPatterns)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	log.Printf("Loaded patterns from pre-processed JSON. Total: %d \n", len(dataPatterns))
 
@@ -72,6 +101,8 @@ func generatePatternTrie() *types.Patterns {
 			EntireBlockOptional: p.EntireBlockOptional,
 		}
 	}
+
+	retval.CommonOptionalPatterns = loadCommonPatterns()
 
 	return retval
 }

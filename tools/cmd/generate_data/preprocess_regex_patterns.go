@@ -62,7 +62,10 @@ func saveRegexPatternsFromSource() {
 		log.Fatal(err)
 	}
 
-	json.Unmarshal(byteVal, &pSource)
+	err = json.Unmarshal(byteVal, &pSource)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	log.Println("Pre-processing possible patterns from regex.")
 	pDest = make(map[string]patternBlockPreprocessed, len(pSource))
