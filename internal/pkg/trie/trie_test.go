@@ -160,9 +160,7 @@ func BenchmarkTrie_MatchLongestCommonPrefix(b *testing.B) {
 	b.ReportAllocs()
 
 	for n := 0; n < b.N; n++ {
-		for i := 1; i < 2000; i++ {
-			tree.MatchLongestCommonPrefix("কখগঘঙচছজঝঞ")
-		}
+		tree.MatchLongestCommonPrefix("কখগঘঙচছজঝঞ")
 	}
 }
 
@@ -177,8 +175,6 @@ func BenchmarkNode_FindMatchingNode(b *testing.B) {
 	b.ReportAllocs()
 
 	for n := 0; n < b.N; n++ {
-		for i := 1; i < 2000; i++ {
-			tree.Root.FindMatchingNode("কখগঘঙ")
-		}
+		tree.Root.FindMatchingNode("কখগঘঙ")
 	}
 }

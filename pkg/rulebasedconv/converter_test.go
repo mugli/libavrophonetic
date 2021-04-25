@@ -63,13 +63,12 @@ func TestConvertWord(t *testing.T) {
 func BenchmarkConvertWord(b *testing.B) {
 	converter := rulebasedconv.NewConverter()
 	testCases, _ := buildTestCases()
+	numTests := len(testCases) - 1
 
 	b.ResetTimer()
 	b.ReportAllocs()
 
 	for i := 0; i < b.N; i++ {
-		for _, testCase := range testCases {
-			converter.ConvertWord(testCase.input)
-		}
+		converter.ConvertWord(testCases[i%numTests].input)
 	}
 }
