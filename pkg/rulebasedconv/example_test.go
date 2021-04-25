@@ -6,7 +6,7 @@ import (
 	"github.com/mugli/libavrophonetic/pkg/rulebasedconv"
 )
 
-func ExampleConvertWord() {
+func ExampleConverter_ConvertWord() {
 	converter := rulebasedconv.NewConverter()
 	output := converter.ConvertWord("bangla")
 	fmt.Println(output)
