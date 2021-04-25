@@ -3,7 +3,7 @@
 
 [Work in Progress]
 
-Go package providing classing (rule-based) and dictionary backed transliterator for [Avro Phonetic](https://en.wikipedia.org/wiki/Avro_Keyboard).
+Go package providing classic (rule-based) and dictionary backed transliterator for [Avro Phonetic](https://en.wikipedia.org/wiki/Avro_Keyboard).
 
 
 ## Optimizations
