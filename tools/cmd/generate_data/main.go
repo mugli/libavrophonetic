@@ -31,4 +31,5 @@ func main() {
 	saveRegexPatternsFromSource()
 	log.Println("----------------------------------------------------")
 	saveBinPatternsData()
+	log.Println("----------------------------------------------------")
 }

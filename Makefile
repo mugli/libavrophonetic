@@ -33,6 +33,7 @@ vet:
 
 generate-data:
 	go run ./tools/cmd/generate_data/ -data-directory=./data
+	go run ./tools/cmd/generate_data/ -data-directory=./pkg/databasedconv/testdata
 
 build: download install-build-tools lint test vet
 	go build ./...

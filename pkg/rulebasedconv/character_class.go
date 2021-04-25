@@ -1,4 +1,4 @@
-package rulebasedcnv
+package rulebasedconv
 
 import (
 	"unicode"

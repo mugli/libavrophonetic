@@ -6,11 +6,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/mugli/libavrophonetic/pkg/databasedcnv"
+	"github.com/mugli/libavrophonetic/pkg/databasedconv"
 )
 
 func saveBinWordData() {
-	words := databasedcnv.NewWords()
+	words := databasedconv.NewWords()
 
 	wordDictionaryPath, err := filepath.Abs(filepath.Join(dataDirectory, wordsSourceFileName))
 	if err != nil {

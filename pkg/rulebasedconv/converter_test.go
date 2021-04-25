@@ -1,4 +1,4 @@
-package rulebasedcnv_test
+package rulebasedconv_test
 
 import (
 	"bufio"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mugli/libavrophonetic/pkg/rulebasedcnv"
+	"github.com/mugli/libavrophonetic/pkg/rulebasedconv"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -48,7 +48,7 @@ func buildTestCases() ([]testCase, error) {
 }
 
 func TestConvertWord(t *testing.T) {
-	converter := rulebasedcnv.NewConverter()
+	converter := rulebasedconv.NewConverter()
 	testCases, err := buildTestCases()
 	assert.NoError(t, err)
 
@@ -61,7 +61,7 @@ func TestConvertWord(t *testing.T) {
 }
 
 func BenchmarkConvertWord(b *testing.B) {
-	converter := rulebasedcnv.NewConverter()
+	converter := rulebasedconv.NewConverter()
 	testCases, _ := buildTestCases()
 
 	b.ResetTimer()

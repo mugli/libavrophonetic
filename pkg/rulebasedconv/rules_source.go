@@ -1,10 +1,11 @@
-package rulebasedcnv
+package rulebasedconv
 
 /*
 Note:
 Many re-implementation of Avro Classic Phonetic saw the JavaScript implementation
 (https://github.com/torifat/jsAvroPhonetic/blob/master/src/avro-lib.js) and thought it might be a better idea to extract
-the rules in a separate JSON file to make Avro Phonetic more configurable by the users. But I am going to keep it hardcoded like this.
+the rules in a separate JSON file to make Avro Phonetic more configurable by the users.
+But I am going to keep it hardcoded like this.
 
 Reasons:
 - In practice, that customization never happened. These rules are complex and may lead to subtle errors and end users

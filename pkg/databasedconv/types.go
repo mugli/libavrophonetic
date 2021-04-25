@@ -1,4 +1,4 @@
-package databasedcnv
+package databasedconv
 
 import (
 	"encoding/gob"
