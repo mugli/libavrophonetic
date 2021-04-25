@@ -28,7 +28,7 @@ func main() {
 	databasedConversion := databasedConverter.ConvertWord(arg)
 
 	fmt.Printf("(Rulebased conversion) %s = %s \n", arg, rulebasedConversion)
-	fmt.Printf("(Databased conversion) %s = %#v \n", arg, databasedConversion)
+	fmt.Printf("(Databased conversion) %s = %v \n", arg, databasedConversion)
 }
 
 func printUsage() {
