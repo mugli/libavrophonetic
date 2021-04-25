@@ -29,7 +29,7 @@ go run ./cmd/avrophoneticdemo shadhinota
 
 
 ```bash 
-  go get -u https://github.com/mugli/libavrophonetic
+  go get -u github.com/mugli/libavrophonetic
 ```
 
 ## Usage/Examples
