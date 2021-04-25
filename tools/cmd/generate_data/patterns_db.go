@@ -27,6 +27,7 @@ func saveBinPatternsData() {
 	defer outFile.Close()
 
 	log.Println("Saving pattern db.")
+
 	err = patterns.SaveToGob(outFile)
 	if err != nil {
 		log.Fatal(err)
@@ -42,10 +43,12 @@ func loadCommonPatterns() (commonPatterns []string) {
 	}
 
 	log.Printf("Loading common patterns: %s\n", inputFilePath)
+
 	jsonFile, err := os.Open(inputFilePath)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	defer jsonFile.Close()
 
 	byteVal, err := ioutil.ReadAll(jsonFile)

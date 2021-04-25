@@ -27,6 +27,7 @@ type rules []rule
 
 func newRules() *rules {
 	var rulesCopy = make(rules, len(avroClassicPhoneticRules))
+
 	copy(rulesCopy, avroClassicPhoneticRules)
 
 	rules := &rulesCopy
@@ -36,7 +37,8 @@ func newRules() *rules {
 	// do the sorting when we initialize the rules from the avroClassicPhoneticRules.
 	rules.sortRulesByDescendingMatchLength()
 
-	// Set matchCondition.isNot boolean property based on the presence of ! character in matchCondition.is to speed up conversion
+	// Set the matchCondition.isNot boolean property based on the presence of ! character
+	// in matchCondition.is to speed up conversion
 	rules.updateNegativeConditions()
 
 	return rules
