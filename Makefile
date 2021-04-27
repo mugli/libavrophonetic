@@ -4,7 +4,7 @@ download:
 
 install-build-tools: download
 	@echo Installing tools from buildtools.go
-	cat buildtools/buildtools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
+	cat internal/buildtools/buildtools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
 	go mod tidy
 
 format-all:
@@ -32,8 +32,8 @@ vet:
 	go vet ./...
 
 generate-data:
-	go run ./tools/cmd/generate_data/ -data-directory=./data
-	go run ./tools/cmd/generate_data/ -data-directory=./pkg/databasedconv/testdata
+	go run ./internal/cmd/generate_data/ -data-directory=./data
+	go run ./internal/cmd/generate_data/ -data-directory=./databasedconv/testdata
 
 build: download install-build-tools lint test vet
 	go build ./...

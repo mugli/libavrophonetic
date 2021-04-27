@@ -1,0 +1,29 @@
+# rules with a
+a আ
+ia ইয়া
+(a (আ
+(a` (া
+aa আআ
+aa` আা
+amar আমার
+
+# rules with periods
+. ।
+.. ।।
+... ...
+
+# nukta cases
+R ড়
+Rh ঢ়
+
+# misc tests
+kobja কব্জা
+bhladimir ভ্লাদিমির
+vladimir ভ্লাদিমির
+lobdho লব্ধ
+jobdo জব্দ
+accha আচ্ছা
+bacca বাচ্চা
+boDDo বড্ড
+bou বউ
+bOU বৌ

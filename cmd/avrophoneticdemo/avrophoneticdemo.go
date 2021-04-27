@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mugli/libavrophonetic/pkg/databasedconv"
-	"github.com/mugli/libavrophonetic/pkg/rulebasedconv"
+	"github.com/mugli/libavrophonetic/databasedconv"
+	"github.com/mugli/libavrophonetic/rulebasedconv"
 )
 
 func main() {

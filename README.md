@@ -3,21 +3,21 @@
 
 [Work in Progress]
 
-Go package providing classing (rule-based) and dictionary backed transliterator for [Avro Phonetic](https://en.wikipedia.org/wiki/Avro_Keyboard).
+Go module providing classic (rule-based) and dictionary backed transliterators for [Avro Phonetic](https://en.wikipedia.org/wiki/Avro_Keyboard).
 
 
 ## Optimizations
 
 This implementation is also the fastest dictionary based suggestion generator as far as I know. Primarily because this does not scan through the dictionary looking for regular-expression match and use a **Trie** instead.
 
-Comparing apples to oranges (because why not ¯\_(ツ)_/¯), this is **~100 times faster** than previous JavaScript and regular-expression based suggestion generator running in Node.js env.
+Comparing apples to oranges (because why not), this is **~100 times faster** than previous JavaScript and regular-expression based suggestion generator (tested in Node.js env).
 
 
 
 
 ## Demo
 
-This package is intended to be used as a library.
+This module is intended to be used as a library.
 
 However, for quickly checking the output there is a demo CLI. Run the following command:
 
@@ -29,7 +29,7 @@ go run ./cmd/avrophoneticdemo shadhinota
 
 
 ```bash 
-  go get -u https://github.com/mugli/libavrophonetic
+  go get -u github.com/mugli/libavrophonetic
 ```
 
 ## Usage/Examples
@@ -41,8 +41,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mugli/libavrophonetic/pkg/databasedconv"
-	"github.com/mugli/libavrophonetic/pkg/rulebasedconv"
+	"github.com/mugli/libavrophonetic/databasedconv"
+	"github.com/mugli/libavrophonetic/rulebasedconv"
 )
 
 func main() {
@@ -74,7 +74,7 @@ To run tests/see coverage, run the following commands:
 
 ## Data generation
 
-Instead of using plain text data-files, this package uses a [gob encoded](https://blog.golang.org/gob) files for faster data loading (aka, Trie generation).
+Instead of using plain text data-files, this module uses a [gob encoded](https://blog.golang.org/gob) files for faster data loading (aka, Trie generation).
 
 Also, the gob files gets embedded with the binary during compile time using [embed package](https://golang.org/pkg/embed/) introduced in Go 1.16.
 
