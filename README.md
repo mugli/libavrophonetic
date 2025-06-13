@@ -1,10 +1,19 @@
 
 # libavrophonetic
 
-[Work in Progress]
+
 
 Go module providing classic (rule-based) and dictionary backed transliterators for [Avro Phonetic](https://en.wikipedia.org/wiki/Avro_Keyboard).
 
+---
+
+## Update (2025-06-13)
+
+### Take a look at https://github.com/OpenBangla/upodesh for a better alternative.
+
+Trie is fast, but can require a lot of memory. `OpenBangla/upodesh` uses Finite State Transducer (FST) instead to tackle the memory usage, and it is still fast (See this PR: https://github.com/OpenBangla/upodesh/pull/10)! 
+
+---
 
 ## Optimizations
 
